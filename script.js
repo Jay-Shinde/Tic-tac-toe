@@ -20,11 +20,15 @@ const checkWin = ()=>{
     ]
     wins.forEach(e=>{
         if(boxtext[e[0]].innerText===boxtext[e[1]].innerText && boxtext[e[0]].innerText===boxtext[e[2]].innerText && boxtext[e[0]].innerText!==""){
+            
             document.getElementsByClassName('info')[0].innerText=boxtext[e[0]].innerText+" Won";
             gameover=true;
             winnermusic.play();
             document.querySelector('.imgbox img').style.width='200px'
-  
+            boxes[e[1]].classList.add("animation");
+            boxes[e[0]].classList.add("animation");
+            boxes[e[2]].classList.add("animation");
+
         }
     })
 }
@@ -40,11 +44,11 @@ Array.from(boxes).forEach(element=>{
             turnmusic.play();
             checkWin();
             if(!gameover){
-                document.getElementsByClassName("info")[0].
+            document.getElementsByClassName("info")[0].
             innerText='turn for '+turn;
             }
         }
-        
+         
     })
 })
 
@@ -54,9 +58,13 @@ resetbtn.addEventListener('click', ()=>{
     Array.from(boxvalues).forEach(ele=>{
         ele.innerText='';
     })
+    Array.from(boxes).forEach(ele=>{
+        ele.classList.remove("animation");
+    })
     gameover=false
     document.getElementsByClassName('info')[0].innerText="Turn for "+turn;
     document.querySelector('.imgbox img').style.width='0px'
+   
 })
 
 // let boxes=document.getElementsByClassName("box")//9 div with classname box each containing span with classname boxtext
